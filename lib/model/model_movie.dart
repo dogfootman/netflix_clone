@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Movie {
   final String title;
   final String keyword;
@@ -9,6 +11,12 @@ class Movie {
       keyword = map['keyword'],
       poster = map['poster'],
       like = map['like'];
+
+  Movie.fromSnapshot(DocumentSnapshot document)
+      : title = document['title'],
+        keyword = document['keyword'],
+        poster = document['poster'],
+        like = document['like'];
 
   @override
   String toString() => "Movie<$title:$keyword>";

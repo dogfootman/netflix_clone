@@ -3,10 +3,25 @@ import 'package:netflix_clone/screen/more_screen.dart';
 import 'package:netflix_clone/widget/bottom_bar.dart';
 import 'package:netflix_clone/screen/home_screen.dart';
 
-// void main() {
-//   runApp(const MyApp());
-// }
-void main() => runApp(MyApp());
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:netflix_clone/config/config.dart';
+
+// void main() => runApp(MyApp());
+void main() async {
+  final configurations = Configurations();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    //options: DefaultFirebaseOptions.currentPlatform,
+    options: FirebaseOptions(
+      apiKey: configurations.apiKey,
+      appId: configurations.appId,
+      messagingSenderId: configurations.messagingSenderId,
+      projectId: configurations.projectId,
+    ),
+  );
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
